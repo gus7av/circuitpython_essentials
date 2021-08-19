@@ -20,7 +20,7 @@ btn.disable()
 # SOUND
 cp.play_tone(board.A0, 440, 1)          # pin, frequency, duration (s)
 cp.play_wav("filename.wav", board.A0)   
-cp.play_mp3("filename.mp3", board.A0             
+cp.play_mp3("filename.mp3", board.A0)             
 
 # CPU temperature
 cp.temperature()
