@@ -1,25 +1,32 @@
-# CHEATSHEET CIRCUITPYTHON ESSENTIALS HELPLER LIBRARY
+## USAGE
 
-import circuitpython_essentials as cp
-import board
 
-# BASIC IO-FUNCTIONS
+### Setup
+`import circuitpython_essentials as cp`  
+`import board`  
 
-# initialization                        # call
-led = cp.output(board.D13)              led.value=True
-btn = cp.input_pullup(board.D7)         btn.value
-btn = cp.input_pulldown(board.D4)       btn.value
-adc = cp.analog_input(board.A8)         adc.value
-dac = cp.analog_output(board.A0)        dac.value=65535-0
-pwm = cp.pwm_output(board.D13)          pwn.value=65535-0
+### Initialization                    
+`led = cp.output(board.D13)`             
+`btn = cp.input_pullup(board.D7)`      
+`btn = cp.input_pulldown(board.D4)`     
+`adc = cp.analog_input(board.A8)`           
+`dac = cp.analog_output(board.A0)`    
+`pwm = cp.pwm_output(board.D13)`        
 
-# deinitialization
-btn.disable()
+### Call
+`led.value=True`  
+`btn.value`  
+`adc.value`  
+`dac.value=65535-0`  
+`pwn.value=65535-0`  
 
-# SOUND
-cp.play_tone(board.A0, 440, 1)          # pin, frequency, duration (s)
-cp.play_wav("filename.wav", board.A0)   
-cp.play_mp3("filename.mp3", board.A0)           
+### Deinitialization
+`btn.disable()`  
 
-# CPU temperature
-cp.temperature()
+### Sound
+`cp.play_tone(board.A0, 440, 1)`  
+`cp.play_wav("filename.wav", board.A0)`   
+`cp.play_mp3("filename.mp3", board.A0)`          
+
+### Temperature
+`cp.temperature()`  
