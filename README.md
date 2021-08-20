@@ -1,6 +1,6 @@
 ## CircuitPython Essentials Helper 
 
-This is a helper library for the most basic functions in CircuitPython. I've made it mainly overcome my inability to remember how to use these functions by heart. It is heavily inspiried and sampled from Adafruits own helper library for the Circuit Playground platform. Thanks to @kattni and @tannewt for creating that library. Please contact me of I'm crediting or using your material wrongly!
+This is a helper library for the most basic functions in CircuitPython. I've made it mainly to overcome my inability to remember how to use these functions by heart. It is heavily inspiried and sampled from Adafruits own helper library for the Circuit Playground platform. Thanks to @kattni and @tannewt for creating that library. Please contact me if I'm crediting or using your material wrongly!
 
 ```
 # cheatsheet circuitpython_essentials
