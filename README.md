@@ -1,4 +1,4 @@
-### CircuitPython Essentials Helper 
+## CircuitPython Essentials Helper 
 
 This is a helper library for the most basic functions in CircuitPython. I've made it mainly overcome my inability to remember how to use these functions by heart. It is heavily inspiried and sampled from Adafruits own helper library for the Circuit Playground platform. Thanks to @kattni and @tannewt for creating that library. Please contact me of I'm crediting or using your material wrongly!
 
@@ -29,5 +29,5 @@ cp.play_mp3("filename.mp3", board.A0)
 cp.temperature()
 ```
 
-#### Installation
-Place the file called "circuitpython_essentials" in a folder called "lib" in the root directory of your CircuitPython microcontroller
+## Installation
+Place the file called "circuitpython_essentials.py" in a folder called "lib" in the root directory of your CircuitPython microcontroller
