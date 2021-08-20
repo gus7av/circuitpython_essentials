@@ -31,3 +31,19 @@ cp.temperature()
 
 ## Installation
 Place the file called "circuitpython_essentials.py" in a folder called "lib" in the root directory of your CircuitPython microcontroller
+
+## Examples
+
+#### Blink
+```
+import circuitpython_essentials as cp
+import board
+import time
+
+led = cp.output(board.D13)
+
+while True:
+    led.value = not led.value
+    time.sleep(1)
+ ```
+
