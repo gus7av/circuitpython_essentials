@@ -28,3 +28,6 @@ cp.play_mp3("filename.mp3", board.A0)
 # temperature
 cp.temperature()
 ```
+
+#### Installation
+Place the file called "circuitpython_essentials" in a folder called "lib" in the root directory of your CircuitPython microcontroller
