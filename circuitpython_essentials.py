@@ -1,4 +1,4 @@
-# updated 19-08-21
+# updated 24-08-21
 
 import digitalio
 import analogio
@@ -7,6 +7,11 @@ import touchio
 import time
 import array
 import audiocore
+
+try:
+    import alarm
+except ImportError:
+    pass  # not supported by every board!
 
 try:
     import audiomp3
@@ -175,3 +180,13 @@ def play_tone(pin, frequency, duration=1, length=100):
                 dac.play(square_wave_sample, loop=True)
                 time.sleep(duration)
             dac.stop()
+            
+def deep_sleep(time_or_pin, logic=True, pull_enable=True):
+    
+    if isinstance(time_or_pin, int) is True:
+        time_alarm = alarm.time.TimeAlarm(monotonic_time=time.monotonic() + time_or_pin)
+        alarm.exit_and_deep_sleep_until_alarms(time_alarm)
+        
+    else:
+        pin_alarm = alarm.pin.PinAlarm(pin=time_or_pin, value=logic, pull=pull_enable)
+        alarm.exit_and_deep_sleep_until_alarms(pin_alarm)
