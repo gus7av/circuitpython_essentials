@@ -65,5 +65,5 @@ for i in range(20):
     time.sleep(0.1)
     
 cp.deep_sleep(board.D4)     
-# cp.deep_sleep(10) for timed sleep
+# cp.deep_sleep(10)
 ```
