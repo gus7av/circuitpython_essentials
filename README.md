@@ -31,7 +31,7 @@ cp.temperature()
 #deep sleep
 cp.deep_sleep(10)
 cp.deep_sleep(board.D4)
-cp.deep_sleep(board.D4, True, True)    (pin, value, pull. True, True is default)
+cp.deep_sleep(board.D4, True, True)    (default for value and pull)
 ```
 
 ## Installation
