@@ -52,3 +52,18 @@ while True:
     time.sleep(1)
  ```
 
+#### Deep sleep
+```
+import circuitpython_essentials as cp
+import board
+import time
+
+led = cp.output(board.D13)
+
+for i in range(20):
+    led.value = not led.value
+    time.sleep(0.1)
+    
+cp.deep_sleep(board.D4)     
+# cp.deep_sleep(10) for timed sleep
+```
