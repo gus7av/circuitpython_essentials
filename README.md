@@ -28,7 +28,7 @@ cp.play_mp3("filename.mp3", board.A0)
 # temperature
 cp.temperature()
 
-#deep sleep
+# deep sleep
 cp.deep_sleep(10)
 cp.deep_sleep(board.D4)
 cp.deep_sleep(board.D4, True, True)    (default for value and pull)
