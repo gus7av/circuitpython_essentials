@@ -3,8 +3,6 @@
 This is a helper library for the most basic functions in CircuitPython. I've made it mainly to overcome my inability to remember how to use these functions by heart. It is heavily inspiried and sampled from Adafruits own helper library for the Circuit Playground platform. Please contact me if I'm crediting or using your material wrongly!
 
 ```
-# cheatsheet circuitpython_essentials
-
 # setup
 import circuitpython_essentials as cp
 import board
