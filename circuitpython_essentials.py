@@ -1,4 +1,4 @@
-# updated 24-08-21
+# updated 06-01-22
 
 import digitalio
 import analogio
@@ -41,7 +41,7 @@ class output:
     def value(self, value):
         self.iopin.value = value
 
-    def disable(self):
+    def deinit(self):
         self.iopin.deinit()
 
 class input:
@@ -54,7 +54,7 @@ class input:
     def value(self):
         return self.iopin.value
 
-    def disable(self):
+    def deinit(self):
         self.iopin.deinit()
 
 class input_pullup:
@@ -67,7 +67,7 @@ class input_pullup:
     def value(self):
         return self.iopin.value
 
-    def disable(self):
+    def deinit(self):
         self.iopin.deinit()
 
 class input_pulldown:
@@ -80,7 +80,7 @@ class input_pulldown:
     def value(self):
         return self.iopin.value
 
-    def disable(self):
+    def deinit(self):
         self.iopin.deinit()
 
 class analog_input:
@@ -92,7 +92,7 @@ class analog_input:
     def value(self):
         return self.iopin.value
 
-    def disable(self):
+    def deinit(self):
         self.iopin.deinit()
 
 class analog_output:
@@ -108,7 +108,7 @@ class analog_output:
     def value(self, value):
         self.iopin.value = value
 
-    def disable(self):
+    def deinit(self):
         self.iopin.deinit()
 
 class pwm_output:
@@ -124,7 +124,7 @@ class pwm_output:
     def value(self, value):
         self.iopin.duty_cycle = value
 
-    def disable(self):
+    def deinit(self):
         self.iopin.deinit()
 
 class touch_input:
@@ -136,7 +136,7 @@ class touch_input:
     def value(self):
         return self.iopin.value
 
-    def disable(self):
+    def deinit(self):
         self.iopin.deinit()
 
 def play_wav(file_name, pin):
@@ -191,6 +191,6 @@ def deep_sleep(time_or_pin, logic=True, pull_enable=True):
     else:
         pin_alarm = alarm.pin.PinAlarm(pin=time_or_pin, value=logic, pull=pull_enable)
         alarm.exit_and_deep_sleep_until_alarms(pin_alarm)
-        
+
 def temperature():
     return microcontroller.cpu.temperature
