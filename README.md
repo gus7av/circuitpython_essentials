@@ -16,7 +16,7 @@ dac = cp.analog_output(board.A0)        dac.value=65535
 pwm = cp.pwm_output(board.D13)          pwn.value=65535
 
 # deinitialization
-btn.disable() ...etc.
+btn.deinit() ...etc.
 
 # sound
 cp.play_tone(board.A0, 440, 1)         
