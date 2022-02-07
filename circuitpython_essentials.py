@@ -138,7 +138,7 @@ class tone_output:
         
     @property
     def volume(self):
-        return 1 / self.iopin.duty_cycle
+        return self.iopin.duty_cycle
 
     @value.setter
     def value(self, value):
@@ -147,8 +147,7 @@ class tone_output:
         
     @volume.setter
     def volume(self, volume):
-        volume = max(0, min(volume, 1))
-        self.iopin.duty_cycle = 0x8000 * volume
+        self.iopin.duty_cycle = min(volume, 0x8000)
 
     def stop(self):
         self.iopin.duty_cycle = 0
