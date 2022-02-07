@@ -1,4 +1,4 @@
-# updated 06-01-22
+# updated 07-02-22
 
 import digitalio
 import analogio
@@ -118,11 +118,31 @@ class pwm_output:
 
     @property
     def value(self):
-        return self.iopin.value
+        return self.iopin.duty_cycle
 
     @value.setter
     def value(self, value):
         self.iopin.duty_cycle = value
+
+    def deinit(self):
+        self.iopin.deinit()
+
+class tone_output:
+
+    def __init__(self, pin):
+        self.iopin = pwmio.PWMOut(pin, frequency=440, duty_cycle=0, variable_frequency=True)
+
+    @property
+    def value(self):
+        return self.iopin.frequency
+
+    @value.setter
+    def value(self, value):
+        self.iopin.duty_cycle = 0x8000
+        self.iopin.frequency = value
+
+    def stop(self):
+        self.iopin.duty_cycle = 0
 
     def deinit(self):
         self.iopin.deinit()
