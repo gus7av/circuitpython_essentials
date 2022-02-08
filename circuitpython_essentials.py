@@ -221,4 +221,21 @@ def deep_sleep(time_or_pin, logic=True, pull_enable=True):
         alarm.exit_and_deep_sleep_until_alarms(pin_alarm)
 
 def temperature():
+    
     return microcontroller.cpu.temperature
+
+def map(x, in_min, in_max, out_min, out_max):
+    
+    in_range = in_max - in_min
+    in_delta = x - in_min
+    if in_range != 0:
+        mapped = in_delta / in_range
+    elif in_delta != 0:
+        mapped = in_delta
+    else:
+        mapped = 0.5
+    mapped *= out_max - out_min
+    mapped += out_min
+    if out_min <= out_max:
+        return max(min(mapped, out_max), out_min)
+    return min(max(mapped, out_max), out_min)
