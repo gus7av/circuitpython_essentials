@@ -14,8 +14,8 @@ btn = cp.input_pulldown(board.D4)       btn.value
 adc = cp.analog_input(board.A8)         adc.value
 dac = cp.analog_output(board.A0)        dac.value=65535
 pwm = cp.pwm_output(board.D13)          pwm.value=65535
-cap = touch_input(board.D4)             cap.value
-buz = tone_output(board.A0)             buz.value=440
+cap = cp.touch_input(board.D4)          cap.value
+buz = cp.tone_output(board.A0)          buz.value=440
                                         buz.volume=2**15
                                         buz.stop()
 
