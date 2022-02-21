@@ -15,17 +15,15 @@ adc = cp.analog_input(board.A8)         adc.value
 dac = cp.analog_output(board.A0)        dac.value=65535
 pwm = cp.pwm_output(board.D13)          pwm.value=65535
 cap = cp.touch_input(board.D4)          cap.value
-buz = cp.tone_output(board.A0)          buz.value=440
-                                        buz.volume=0x8000
-                                        buz.stop()
+buz = cp.tone_output(board.A0)          buz.value=440, buz.stop()
 
 # deinitialization
 btn.deinit() ...etc.
 
 # sound
-cp.play_tone(440, 1, pin=board.A0)         
-cp.play_wav("filename.wav", pin=board.A0)   
-cp.play_mp3("filename.mp3", pin=board.A0)             
+cp.play_tone(board.A0, 440, 1)         
+cp.play_wav(board.A0, "filename.wav")   
+cp.play_mp3(board.A0, "filename.mp3")             
 
 # temperature
 cp.temperature()
