@@ -8,6 +8,7 @@ import time
 import array
 import audiocore
 import microcontroller
+import board
 
 try:
     import alarm
@@ -27,8 +28,8 @@ except ImportError:
     except ImportError:
         pass  # not supported by every board!
 
-class output:
 
+class output:
     def __init__(self, pin):
         self.iopin = digitalio.DigitalInOut(pin)
         self.iopin.switch_to_output()
@@ -44,8 +45,8 @@ class output:
     def deinit(self):
         self.iopin.deinit()
 
-class input:
 
+class input:
     def __init__(self, pin):
         self.iopin = digitalio.DigitalInOut(pin)
         self.iopin.switch_to_input()
@@ -57,8 +58,8 @@ class input:
     def deinit(self):
         self.iopin.deinit()
 
-class input_pullup:
 
+class input_pullup:
     def __init__(self, pin):
         self.iopin = digitalio.DigitalInOut(pin)
         self.iopin.switch_to_input(pull=digitalio.Pull.UP)
@@ -70,8 +71,8 @@ class input_pullup:
     def deinit(self):
         self.iopin.deinit()
 
-class input_pulldown:
 
+class input_pulldown:
     def __init__(self, pin):
         self.iopin = digitalio.DigitalInOut(pin)
         self.iopin.switch_to_input(pull=digitalio.Pull.DOWN)
@@ -83,8 +84,8 @@ class input_pulldown:
     def deinit(self):
         self.iopin.deinit()
 
-class analog_input:
 
+class analog_input:
     def __init__(self, pin):
         self.iopin = analogio.AnalogIn(pin)
 
@@ -95,8 +96,8 @@ class analog_input:
     def deinit(self):
         self.iopin.deinit()
 
-class analog_output:
 
+class analog_output:
     def __init__(self, pin):
         self.iopin = analogio.AnalogOut(pin)
 
@@ -111,8 +112,8 @@ class analog_output:
     def deinit(self):
         self.iopin.deinit()
 
-class pwm_output:
 
+class pwm_output:
     def __init__(self, pin):
         self.iopin = pwmio.PWMOut(pin, frequency=5000, duty_cycle=0)
 
@@ -127,15 +128,17 @@ class pwm_output:
     def deinit(self):
         self.iopin.deinit()
 
-class tone_output:
 
+class tone_output:
     def __init__(self, pin):
-        self.iopin = pwmio.PWMOut(pin, frequency=440, duty_cycle=0, variable_frequency=True)
+        self.iopin = pwmio.PWMOut(
+            pin, frequency=440, duty_cycle=0, variable_frequency=True
+        )
 
     @property
     def value(self):
         return self.iopin.frequency
-        
+
     @property
     def volume(self):
         return self.iopin.duty_cycle
@@ -144,7 +147,7 @@ class tone_output:
     def value(self, value):
         self.iopin.duty_cycle = 0x8000
         self.iopin.frequency = value
-        
+
     @volume.setter
     def volume(self, volume):
         self.iopin.duty_cycle = min(volume, 0x8000)
@@ -155,8 +158,8 @@ class tone_output:
     def deinit(self):
         self.iopin.deinit()
 
-class touch_input:
 
+class touch_input:
     def __init__(self, pin):
         self.iopin = touchio.TouchIn(pin)
 
@@ -167,7 +170,8 @@ class touch_input:
     def deinit(self):
         self.iopin.deinit()
 
-def play_wav(file_name, pin):
+
+def play_wav(file_name, pin=board.A0):
 
     with AudioOut(pin) as audio:
         wavefile = audiocore.WaveFile(open(file_name, "rb"))
@@ -175,7 +179,8 @@ def play_wav(file_name, pin):
         while audio.playing:
             pass
 
-def play_mp3(file_name, pin):
+
+def play_mp3(file_name, pin=board.A0):
 
     with AudioOut(pin) as audio:
         mp3file = audiomp3.MP3Decoder(open(file_name, "rb"))
@@ -183,7 +188,8 @@ def play_mp3(file_name, pin):
         while audio.playing:
             pass
 
-def play_tone(pin, frequency, duration=1, length=100):
+
+def play_tone(frequency, duration=1, pin=board.A0, length=100):
 
     if length * frequency > 350000:
         length = 350000 // frequency
@@ -210,22 +216,25 @@ def play_tone(pin, frequency, duration=1, length=100):
                 time.sleep(duration)
             dac.stop()
 
-def deep_sleep(time_or_pin, logic=True, pull_enable=True):
+
+def deep_sleep(time_or_pin, value=True, pull=True):
 
     if isinstance(time_or_pin, int) is True:
         time_alarm = alarm.time.TimeAlarm(monotonic_time=time.monotonic() + time_or_pin)
         alarm.exit_and_deep_sleep_until_alarms(time_alarm)
 
     else:
-        pin_alarm = alarm.pin.PinAlarm(pin=time_or_pin, value=logic, pull=pull_enable)
+        pin_alarm = alarm.pin.PinAlarm(pin=time_or_pin, value=value, pull=pull)
         alarm.exit_and_deep_sleep_until_alarms(pin_alarm)
 
+
 def temperature():
-    
+
     return microcontroller.cpu.temperature
 
+
 def map(x, in_min, in_max, out_min, out_max):
-    
+
     in_range = in_max - in_min
     in_delta = x - in_min
     if in_range != 0:
