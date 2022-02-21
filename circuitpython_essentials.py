@@ -171,7 +171,7 @@ class touch_input:
         self.iopin.deinit()
 
 
-def play_wav(file_name, pin=board.A0):
+def play_wav(pin, file_name):
 
     with AudioOut(pin) as audio:
         wavefile = audiocore.WaveFile(open(file_name, "rb"))
@@ -180,7 +180,7 @@ def play_wav(file_name, pin=board.A0):
             pass
 
 
-def play_mp3(file_name, pin=board.A0):
+def play_mp3(pin, file_name):
 
     with AudioOut(pin) as audio:
         mp3file = audiomp3.MP3Decoder(open(file_name, "rb"))
@@ -189,7 +189,7 @@ def play_mp3(file_name, pin=board.A0):
             pass
 
 
-def play_tone(frequency, duration=1, pin=board.A0, length=100):
+def play_tone(pin, frequency, duration=0.1, length=100):
 
     if length * frequency > 350000:
         length = 350000 // frequency
@@ -219,7 +219,7 @@ def play_tone(frequency, duration=1, pin=board.A0, length=100):
 
 def deep_sleep(time_or_pin, value=True, pull=True):
 
-    if isinstance(time_or_pin, int) is True:
+    if isinstance(time_or_pin, (int, float)):
         time_alarm = alarm.time.TimeAlarm(monotonic_time=time.monotonic() + time_or_pin)
         alarm.exit_and_deep_sleep_until_alarms(time_alarm)
 
