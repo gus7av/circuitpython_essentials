@@ -7,15 +7,15 @@ This is a helper library for the most basic functions in CircuitPython. I've mad
 import circuitpython_essentials as cp
 import board
 
-# initialization                        # call
-led = cp.output(board.D13)              led.value=True
-btn = cp.input_pullup(board.D7)         btn.value
-btn = cp.input_pulldown(board.D4)       btn.value
-adc = cp.analog_input(board.A8)         adc.value
-dac = cp.analog_output(board.A0)        dac.value=65535
-pwm = cp.pwm_output(board.D13)          pwm.value=65535
-cap = cp.touch_input(board.D4)          cap.value
-buz = cp.tone_output(board.A0)          buz.value=440, buz.stop()
+# initialization                            # call
+led = cp.DigitalOut(board.D13)              led.value=True
+btn = cp.DigitalIn(board.D7, pull=True)     btn.value
+btn = cp.DigitalIn(board.D4, pull=False)    btn.value
+adc = cp.AnalogIn(board.A8)                 adc.value
+dac = cp.AnalogOut(board.A0)                dac.value=65535
+pwm = cp.PWMOut(board.D13)                  pwm.value=65535
+cap = cp.TouchIn(board.D4)                  cap.value
+buz = cp.ToneOut(board.A0)                  buz.value=440, buz.stop()
 
 # deinitialization
 btn.deinit() ...etc.
@@ -32,6 +32,9 @@ cp.temperature()
 cp.deep_sleep(10)
 cp.deep_sleep(board.D4)
 cp.deep_sleep(board.D4, value=True, pull=True)
+
+# map
+cp.map_range(value, fromLow, fromHigh, toLow, toHigh)
 ```
 
 ## Installation
