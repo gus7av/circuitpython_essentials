@@ -8,7 +8,6 @@ import time
 import array
 import audiocore
 import microcontroller
-import board
 
 try:
     import alarm
