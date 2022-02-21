@@ -28,7 +28,7 @@ except ImportError:
         pass  # not supported by every board!
 
 
-class output:
+class DigitalOut:
     def __init__(self, pin):
         self.iopin = digitalio.DigitalInOut(pin)
         self.iopin.switch_to_output()
@@ -45,10 +45,15 @@ class output:
         self.iopin.deinit()
 
 
-class input:
-    def __init__(self, pin):
+class DigitalIn:
+    def __init__(self, pin, pull=None):
         self.iopin = digitalio.DigitalInOut(pin)
-        self.iopin.switch_to_input()
+        if pull is True:
+            self.iopin.switch_to_input(pull=digitalio.Pull.UP)
+        elif pull is False:
+            self.iopin.switch_to_input(pull=digitalio.Pull.DOWN)
+        else:
+            self.iopin.switch_to_input()
 
     @property
     def value(self):
@@ -58,33 +63,7 @@ class input:
         self.iopin.deinit()
 
 
-class input_pullup:
-    def __init__(self, pin):
-        self.iopin = digitalio.DigitalInOut(pin)
-        self.iopin.switch_to_input(pull=digitalio.Pull.UP)
-
-    @property
-    def value(self):
-        return self.iopin.value
-
-    def deinit(self):
-        self.iopin.deinit()
-
-
-class input_pulldown:
-    def __init__(self, pin):
-        self.iopin = digitalio.DigitalInOut(pin)
-        self.iopin.switch_to_input(pull=digitalio.Pull.DOWN)
-
-    @property
-    def value(self):
-        return self.iopin.value
-
-    def deinit(self):
-        self.iopin.deinit()
-
-
-class analog_input:
+class AnalogIn:
     def __init__(self, pin):
         self.iopin = analogio.AnalogIn(pin)
 
@@ -96,7 +75,7 @@ class analog_input:
         self.iopin.deinit()
 
 
-class analog_output:
+class AnalogOut:
     def __init__(self, pin):
         self.iopin = analogio.AnalogOut(pin)
 
@@ -112,7 +91,7 @@ class analog_output:
         self.iopin.deinit()
 
 
-class pwm_output:
+class PWMOut:
     def __init__(self, pin):
         self.iopin = pwmio.PWMOut(pin, frequency=5000, duty_cycle=0)
 
@@ -128,7 +107,7 @@ class pwm_output:
         self.iopin.deinit()
 
 
-class tone_output:
+class ToneOut:
     def __init__(self, pin):
         self.iopin = pwmio.PWMOut(
             pin, frequency=440, duty_cycle=0, variable_frequency=True
@@ -158,7 +137,7 @@ class tone_output:
         self.iopin.deinit()
 
 
-class touch_input:
+class TouchIn:
     def __init__(self, pin):
         self.iopin = touchio.TouchIn(pin)
 
@@ -232,7 +211,7 @@ def temperature():
     return microcontroller.cpu.temperature
 
 
-def map(x, in_min, in_max, out_min, out_max):
+def map_range(x, in_min, in_max, out_min, out_max):
 
     in_range = in_max - in_min
     in_delta = x - in_min
