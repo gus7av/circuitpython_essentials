@@ -1,4 +1,4 @@
-# updated 21-02-22
+# updated 22-02-22
 
 import digitalio
 import analogio
@@ -46,18 +46,19 @@ class DigitalOut:
 
 
 class DigitalIn:
-    def __init__(self, pin, pull=None):
+    def __init__(self, pin):
         self.iopin = digitalio.DigitalInOut(pin)
-        if pull is True:
-            self.iopin.switch_to_input(pull=digitalio.Pull.UP)
-        elif pull is False:
-            self.iopin.switch_to_input(pull=digitalio.Pull.DOWN)
-        else:
-            self.iopin.switch_to_input()
+        self.iopin.switch_to_input()
 
     @property
     def value(self):
         return self.iopin.value
+
+    def pull_down(self):
+        self.iopin.switch_to_input(pull=digitalio.Pull.DOWN)
+
+    def pull_up(self):
+        self.iopin.switch_to_input(pull=digitalio.Pull.UP)
 
     def deinit(self):
         self.iopin.deinit()
