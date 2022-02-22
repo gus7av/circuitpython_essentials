@@ -48,7 +48,7 @@ import circuitpython_essentials as cp
 import board
 import time
 
-led = cp.output(board.D13)
+led = cp.DigitalOut(board.LED)
 
 while True:
     led.value = not led.value
@@ -61,7 +61,7 @@ import circuitpython_essentials as cp
 import board
 import time
 
-led = cp.output(board.D13)
+led = cp.DigitalOut(board.LED)
 
 for i in range(20):
     led.value = not led.value
