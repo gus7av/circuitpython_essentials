@@ -9,8 +9,7 @@ import board
 
 # initialization                            # call
 led = cp.DigitalOut(board.D13)              led.value=True
-btn = cp.DigitalIn(board.D7, pull=True)     btn.value
-btn = cp.DigitalIn(board.D4, pull=False)    btn.value
+btn = cp.DigitalIn(board.D7)                btn.value, btn.pull_up(), btn.pull_down()
 adc = cp.AnalogIn(board.A8)                 adc.value
 dac = cp.AnalogOut(board.A0)                dac.value=65535
 pwm = cp.PWMOut(board.D13)                  pwm.value=65535
