@@ -1,4 +1,4 @@
-# updated 22-02-22
+# updated 05-04-22
 
 import digitalio
 import analogio
@@ -6,8 +6,12 @@ import pwmio
 import touchio
 import time
 import array
-import audiocore
 import microcontroller
+
+try:
+    import audiocore
+except ImportError:
+    pass  # not supported by every board!
 
 try:
     import alarm
